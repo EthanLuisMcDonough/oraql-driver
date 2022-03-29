@@ -75,7 +75,7 @@ def readBenchmarkFile(benchmark_file):
 
 def compileFile(benchmark, source_file, seqfile):
     compiler = oraql_settings.clangcommand
-    if source_file.path.endswith('.cc') or source_file.path.endswith('.cpp'):
+    if source_file.path.endswith('.cc') or source_file.path.endswith('.cpp') or source_file.path.endswith('.cu'):
         compiler =  oraql_settings.clangppcommand
     try:
         run_result = sp.run(f'{compiler} @{seqfile.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
@@ -216,6 +216,7 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
               return False, _seen_before[md5sum]["problemsizes"]
           else:
               logger.debug(f'   We have seen this executable previously, and it was a success.')
+              copyExecutable(benchmark, 'final', fp.name)
               return True, _seen_before[md5sum]["problemsizes"]
       logger.debug(f'    This is a new executable, continue with verification.')
 
