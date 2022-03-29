@@ -1,0 +1,66 @@
+\d+ MPI Tasks of \d+ threads
+truncating the v-cycle at 2\^3 subdomains
+creating domain...       done
+  32 x 32 x 32 \(per subdomain\)
+  64 x 64 x 64 \(per process\)
+  64 x 64 x 64 \(overall\)
+  1-deep ghost zones
+  allocated 34 MB
+initializing alpha, beta, RHS for the ``hard problem''...
+  average value of f =\s+[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?
+done
+MGBuild...                      
+  level= 0, eigenvalue_max ~= 1.999996e\+00
+  level= 1, eigenvalue_max ~= 1.999984e\+00
+  level= 2, eigenvalue_max ~= 1.999935e\+00
+  level= 3, eigenvalue_max ~= 1.999740e\+00
+  level= 4, eigenvalue_max ~= 1.998958e\+00
+done
+MGSolve...                      
+v-cycle= 1, norm=0.0005433262373193\d+ \(5.43\d+e-04\)
+v-cycle= 2, norm=0.0000188534216903\d+ \(1.88\d+e-05\)
+v-cycle= 3, norm=0.0000008790396092\d+ \(8.79\d+e-07\)
+v-cycle= 4, norm=0.0000000418167268\d+ \(4.18\d+e-08\)
+v-cycle= 5, norm=0.0000000015620855\d+ \(1.56\d+e-09\)
+v-cycle= 6, norm=0.0000000000940837\d+ \(9.40\d+e-11\)
+v-cycle= 7, norm=0.0000000000027317\d+ \(2.73\d+e-12\)
+v-cycle= 8, norm=0.0000000000001816\d+ \(1.81\d+e-13\)
+v-cycle= 9, norm=0.0000000000000085\d+ \(8.58\d+e-15\)
+v-cycle=10, norm=0.0000000000000005\d+ \(5.01\d+e-16\)
+done
+MGSolve...                      
+v-cycle= 1, norm=0.0005433262373193\d+ \(5.43\d+e-04\)
+v-cycle= 2, norm=0.0000188534216903\d+ \(1.88\d+e-05\)
+v-cycle= 3, norm=0.0000008790396092\d+ \(8.79\d+e-07\)
+v-cycle= 4, norm=0.0000000418167268\d+ \(4.18\d+e-08\)
+v-cycle= 5, norm=0.0000000015620855\d+ \(1.56\d+e-09\)
+v-cycle= 6, norm=0.0000000000940837\d+ \(9.40\d+e-11\)
+v-cycle= 7, norm=0.0000000000027317\d+ \(2.73\d+e-12\)
+v-cycle= 8, norm=0.0000000000001816\d+ \(1.81\d+e-13\)
+v-cycle= 9, norm=0.0000000000000085\d+ \(8.58\d+e-15\)
+v-cycle=10, norm=0.0000000000000005\d+ \(5.01\d+e-16\)
+done
+                                  0            1            2            3            4 
+                               32\^3         16\^3          8\^3          4\^3          2\^3        total
+smooth                     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+residual                   \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+restriction                \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+interpolation              \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+applyOp                    \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+BLAS1                      \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+BLAS3                      \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+communication              \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+  local exchange           \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+--------------         ------------ ------------ ------------ ------------ ------------ ------------ 
+Total by level             \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+
+  Total time in MGBuild       \d.\d+
+  Total time in MGSolve       \d.\d+
+              " v-cycles      \d.\d+
+      number of v-cycles            \d+
+Bottom solver iterations            \d+
+
+
+Error test: h = 1.562500e-02, max = 3.529713e-04
+Error test: h = 1.562500e-02, L2  = 5.559940e-05
+deallocating domain...   done
