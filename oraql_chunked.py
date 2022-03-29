@@ -3,6 +3,7 @@ import dotmap
 import oraql_settings
 import sys
 import os
+import shutil
 import logging as log
 import subprocess as sp
 import tempfile
@@ -127,12 +128,12 @@ def linkExecutable(benchmark):
     logger.debug(f' Making {executable_path}')
     return True
 
-def moveExecutable(benchmark, version):
+def copyExecutable(benchmark, version):
     executable_path = benchmark.executable
     if not os.path.isfile(executable_path):
         logger.debug(f'  Trying to keep executable as {version}, but {executable_path} did not exist.')
     else:
-        os.rename(executable_path, f'{executable_path}.{version}')
+        shutil.copy(executable_path, f'{executable_path}.{version}')
         logger.debug(f'  Keeping {executable_path}.{version}')
     
 
@@ -230,7 +231,7 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
     # input/output pair. Success!
     logger.info(f'Successful test for all i/o pairs with seq {[(seq,str_BinListAsHex(seqs[seq])) for seq in seqs]}')
     _seen_before[md5sum] = {"res": True, "problemsizes": problemsizes}
-    moveExecutable(benchmark, 'final')
+    copyExecutable(benchmark, 'final')
     return True, problemsizes
 
 def compileAndRunAllConfigurations(benchmark, problemsizes):
@@ -278,7 +279,7 @@ def runBenchmark(benchmark_file):
         logger.info(f'- Initial build successful, proceed to '
                     f'optimistic optimization for '
                     f'{len(benchmark.source_files)} source files')
-        moveExecutable(benchmark, 'initial')
+        copyExecutable(benchmark, 'initial')
         seqs = compileAndRunAllConfigurations(benchmark, problemsizes)
     else:
         logger.info(f'- Initial build of {benchmark.name} failed')
