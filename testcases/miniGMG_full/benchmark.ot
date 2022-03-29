@@ -1,0 +1,38 @@
+{
+    "__type__": "Benchmark",
+    "name": "miniGMG",
+    "source_files": [
+        {
+            "__type__": "SourceFile",
+            "path": "operators.ompif.c",
+            "options": [],
+            "only_functions": ["residual", "smooth", "exchange_boundary"]
+        }
+    ],
+    "input_output_pairs": [
+        {
+            "__type__": "InputOutputPair",
+            "input": ["5", "2", "2", "2", "1", "1", "1"],
+            "output": "miniGMG.reference_output",
+            "timeout": 999,
+            "returncode": 0,
+            "use_stdout": true,
+            "use_stderr": true
+        }
+    ],
+    "options": [
+        "-O3",
+        "-march=native",
+        "-g",
+        "-D__PRINT_NORM",
+        "-c",
+        "-D__COLLABORATIVE_THREADING=6",
+        " -D__TEST_MG_CONVERGENCE",
+        "-D__USE_BICGSTAB",
+        "-fopenmp"
+    ],
+    "executable": "./miniGMG",
+    "make_cmd": "make",
+    "verify_cmd": ""
+}
+

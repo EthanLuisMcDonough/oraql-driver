@@ -1,0 +1,78 @@
+\d+ MPI Tasks of \d+ threads
+truncating the v-cycle at 2\^3 subdomains
+creating domain...       done
+  32 x 32 x 32 \(per subdomain\)
+  64 x 64 x 64 \(per process\)
+  64 x 64 x 64 \(overall\)
+  1-deep ghost zones
+  allocated 34 MB
+initializing alpha, beta, RHS for the ``hard problem''...
+  average value of f =   [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?
+done
+MGBuild...                      
+  level= 0, eigenvalue_max ~= 1.999996e\+00
+  level= 1, eigenvalue_max ~= 1.999984e\+00
+  level= 2, eigenvalue_max ~= 1.999935e\+00
+  level= 3, eigenvalue_max ~= 1.999740e\+00
+  level= 4, eigenvalue_max ~= 1.998958e\+00
+done
+MGSolve...                      
+v-cycle= 1, norm=0.001043068328546821\d+ \(1.04306\de-03\)
+v-cycle= 2, norm=0.000085081670209892\d+ \(8.50816\de-05\)
+v-cycle= 3, norm=0.000018671742765544\d+ \(1.86717\de-05\)
+v-cycle= 4, norm=0.000002041505077275\d+ \(2.04150\de-06\)
+v-cycle= 5, norm=0.000000368591139795\d+ \(3.68591\de-07\)
+v-cycle= 6, norm=0.000000045003781375\d+ \(4.50037\de-08\)
+v-cycle= 7, norm=0.000000007772694026\d+ \(7.77269\de-09\)
+v-cycle= 8, norm=0.000000000964406678\d+ \(9.64406\de-10\)
+v-cycle= 9, norm=0.000000000166878797\d+ \(1.66878\de-10\)
+v-cycle=10, norm=0.000000000020555422\d+ \(2.05554\de-11\)
+v-cycle=11, norm=0.000000000003549528\d+ \(3.54952\de-12\)
+v-cycle=12, norm=0.000000000000437683\d+ \(4.37683\de-13\)
+v-cycle=13, norm=0.000000000000075082\d+ \(7.50828\de-14\)
+v-cycle=14, norm=0.000000000000009229\d+ \(9.22974\de-15\)
+v-cycle=15, norm=0.000000000000001592\d+ \(1.59273\de-15\)
+v-cycle=16, norm=0.000000000000000210\d+ \(2.10308\de-16\)
+done
+MGSolve...                      
+v-cycle= 1, norm=0.001043068328546821\d+ \(1.04306\de-03\)
+v-cycle= 2, norm=0.000085081670209892\d+ \(8.50816\de-05\)
+v-cycle= 3, norm=0.000018671742765544\d+ \(1.86717\de-05\)
+v-cycle= 4, norm=0.000002041505077275\d+ \(2.04150\de-06\)
+v-cycle= 5, norm=0.000000368591139795\d+ \(3.68591\de-07\)
+v-cycle= 6, norm=0.000000045003781375\d+ \(4.50037\de-08\)
+v-cycle= 7, norm=0.000000007772694026\d+ \(7.77269\de-09\)
+v-cycle= 8, norm=0.000000000964406678\d+ \(9.64406\de-10\)
+v-cycle= 9, norm=0.000000000166878797\d+ \(1.66878\de-10\)
+v-cycle=10, norm=0.000000000020555422\d+ \(2.05554\de-11\)
+v-cycle=11, norm=0.000000000003549528\d+ \(3.54952\de-12\)
+v-cycle=12, norm=0.000000000000437683\d+ \(4.37683\de-13\)
+v-cycle=13, norm=0.000000000000075082\d+ \(7.50828\de-14\)
+v-cycle=14, norm=0.000000000000009229\d+ \(9.22974\de-15\)
+v-cycle=15, norm=0.000000000000001592\d+ \(1.59273\de-15\)
+v-cycle=16, norm=0.000000000000000210\d+ \(2.10308\de-16\)
+done
+                                  0            1            2            3            4 
+                               32\^3         16\^3          8\^3          4\^3          2\^3        total
+smooth                     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+residual                   \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+restriction                \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+interpolation              \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+applyOp                    \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+BLAS1                      \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+BLAS3                      \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+communication              \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+  local exchange           \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+--------------         ------------ ------------ ------------ ------------ ------------ ------------ 
+Total by level             \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+     \d.\d+
+
+  Total time in MGBuild       \d.\d+
+  Total time in MGSolve       \d.\d+
+              " v-cycles      \d.\d+
+      number of v-cycles            16
+Bottom solver iterations            37
+
+
+Error test: h = 1.562500e-02, max = 3.529713e-04
+Error test: h = 1.562500e-02, L2  = 5.559940e-05
+deallocating domain...   done
