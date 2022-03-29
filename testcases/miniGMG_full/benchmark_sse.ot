@@ -13,7 +13,7 @@
         {
             "__type__": "InputOutputPair",
             "input": ["5", "2", "2", "2", "1", "1", "1"],
-            "output": "miniGMG.reference_output",
+            "output": "miniGMG_omptask.reference_output",
             "timeout": 999,
             "returncode": 0,
             "use_stdout": true,
