@@ -4,7 +4,7 @@
     "source_files": [
         {
             "__type__": "SourceFile",
-            "path": "operators.avx.c",
+            "path": "operators.ompif.c",
             "options": [],
             "only_functions": ["residual", "smooth", "exchange_boundary"]
         }
