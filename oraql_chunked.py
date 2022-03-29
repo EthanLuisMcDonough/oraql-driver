@@ -114,7 +114,7 @@ def linkExecutable(benchmark):
 
     try: 
         cmd = [benchmark.make_cmd]
-        run_result = sp.run(cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+        run_result = sp.run(cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL, shell=True)
         if run_result.returncode is not 0:
             logger.warn(f'   - Make command error, exit code was '
                         f'{run_result.returncode}:\n'

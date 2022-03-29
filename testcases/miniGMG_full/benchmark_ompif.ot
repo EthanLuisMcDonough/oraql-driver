@@ -31,8 +31,8 @@
         "-D__USE_BICGSTAB",
         "-fopenmp"
     ],
-    "executable": "./miniGMG",
-    "make_cmd": "make",
+    "executable": "./miniGMG_ompif",
+    "make_cmd": "make miniGMG_ompif",
     "verify_cmd": ""
 }
 

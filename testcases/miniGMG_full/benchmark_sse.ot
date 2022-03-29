@@ -4,7 +4,7 @@
     "source_files": [
         {
             "__type__": "SourceFile",
-            "path": "operators.avx.c",
+            "path": "operators.sse.c",
             "options": [],
             "only_functions": ["residual", "smooth", "exchange_boundary"]
         }
@@ -31,8 +31,8 @@
         "-D__USE_BICGSTAB",
         "-fopenmp"
     ],
-    "executable": "./miniGMG_avx",
-    "make_cmd": "make miniGMG_avx",
+    "executable": "./miniGMG_sse",
+    "make_cmd": "make miniGMG_sse",
     "verify_cmd": ""
 }
 
