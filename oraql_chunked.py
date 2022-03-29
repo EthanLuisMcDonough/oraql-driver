@@ -173,7 +173,10 @@ def runAndVerify(benchmark, io_pair):
                      f'{len(expected_output)} vs {len(run_output)}')
         return True
 
-    logger.debug(f'    - Output "%s" did not match expected pattern "%s"'%(run_output, expected_output))
+    for pair in zip(expected_output.splitlines(), run_output.splitlines()):
+        match = re.fullmatch(*pair)
+        if not match:
+            logger.debug(f'    - Output "%s" did not match expected pattern "%s"'%(pair))
     return False
 
 import hashlib
