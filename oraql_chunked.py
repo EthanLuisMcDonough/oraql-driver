@@ -73,22 +73,15 @@ def readBenchmarkFile(benchmark_file):
                      f'{e}')
         return None
 
-def compileFile(benchmark, source_file, seq):
+def compileFile(benchmark, source_file, seqfile):
     compiler = oraql_settings.clangcommand
     if source_file.path.endswith('.cc') or source_file.path.endswith('.cpp'):
         compiler =  oraql_settings.clangppcommand
-    options = source_file.options + benchmark.options
     try:
-        seqstr = " ".join(["-1 "+str(s) for s in seq])
-        cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-optimistic-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
-        with tempfile.NamedTemporaryFile() as fp:
-          fp.write(bytes(cmd, 'utf-8'))
-          fp.flush()
-          run_result = sp.run(f'{compiler} @{fp.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
+        run_result = sp.run(f'{compiler} @{seqfile.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
 
-          if run_result.returncode is not 0:
-            logger.debug(f'   - Compile error, exit code was '
-                          f'{run_result.returncode}:\n')
+        if run_result.returncode is not 0:
+            logger.debug(f'   - Compile error, exit code was {run_result.returncode} and command was:\n{compiler} {cmd} {source_file.path}')
             return False, 0
     except Exception as e:
         logger.warning(f'   - Compile error:\n'
@@ -128,13 +121,15 @@ def linkExecutable(benchmark):
     logger.debug(f' Making {executable_path}')
     return True
 
-def copyExecutable(benchmark, version):
+def copyExecutable(benchmark, version, seqfile=None):
     executable_path = benchmark.executable
     if not os.path.isfile(executable_path):
         logger.debug(f'  Trying to keep executable as {version}, but {executable_path} did not exist.')
     else:
         shutil.copy(executable_path, f'{executable_path}.{version}')
         logger.debug(f'  Keeping {executable_path}.{version}')
+        if seqfile:
+            shutil.copy(seqfile, f'{executable_path}.{version}.sequence.txt')
     
 
 def runAndVerify(benchmark, io_pair):
@@ -193,45 +188,51 @@ _seen_before = dict()
 def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
     global _seen_before
     # compile individual files into object files
-    for source_file in benchmark.source_files:
-        logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
-        success, thisproblemsize = compileFile(benchmark, source_file, seqs[source_file.path])
-        problemsizes[source_file.path] = max(thisproblemsize, problemsizes[source_file.path])
-        if not success:
-            logger.info(f'Failed compilation with seq {str_BinListAsHex(seqs[source_file.path])}')
-            return False, problemsizes
+    with tempfile.NamedTemporaryFile() as fp:
+      for source_file in benchmark.source_files:
+          logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
+          seqstr = " ".join(["-1 "+str(s) for s in seqs[source_file.path]])
+          options = source_file.options + benchmark.options
+          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-optimistic-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          fp.write(bytes(cmd, 'utf-8'))
+          fp.flush()
+          success, thisproblemsize = compileFile(benchmark, source_file, fp)
+          problemsizes[source_file.path] = max(thisproblemsize, problemsizes[source_file.path])
+          if not success:
+              logger.info(f'Failed compilation with seq {str_BinListAsHex(seqs[source_file.path])}')
+              return False, problemsizes
 
-    # link object files into executable
-    success = linkExecutable(benchmark)
-    if not success:
-        logger.info(f'Failed linking with seq {seqs}')
-        return False, problemsizes
-    logger.debug(f'    Compiled. Compare executable file to previously seen files')
-    md5sum = md5(benchmark.executable)
-    if(md5sum in _seen_before):
-        if not _seen_before[md5sum]["res"]:
-            logger.debug(f'   We have seen this executable previously, and it was a failure.')
-            return False, _seen_before[md5sum]["problemsizes"]
-        else:
-            logger.debug(f'   We have seen this executable previously, and it was a success.')
-            return True, _seen_before[md5sum]["problemsizes"]
-    logger.debug(f'    This is a new executable, continue with verification.')
+      # link object files into executable
+      success = linkExecutable(benchmark)
+      if not success:
+          logger.info(f'Failed linking with seq {seqs}')
+          return False, problemsizes
+      logger.debug(f'    Compiled. Compare executable file to previously seen files')
+      md5sum = md5(benchmark.executable)
+      if(md5sum in _seen_before):
+          if not _seen_before[md5sum]["res"]:
+              logger.debug(f'   We have seen this executable previously, and it was a failure.')
+              return False, _seen_before[md5sum]["problemsizes"]
+          else:
+              logger.debug(f'   We have seen this executable previously, and it was a success.')
+              return True, _seen_before[md5sum]["problemsizes"]
+      logger.debug(f'    This is a new executable, continue with verification.')
 
-    # run the generated executable for each input/output pair
-    for iop in benchmark.input_output_pairs:
-        success = runAndVerify(benchmark, iop)
-        if not success:
-            logger.debug(f'    unsuccessful execution.')
-            _seen_before[md5sum] = {"res": False, "problemsizes": problemsizes}
-            logger.info(f'Failed execution with seq {[(seq,str_BinListAsHex(seqs[seq])) for seq in seqs]}')
-            return False, problemsizes
+      # run the generated executable for each input/output pair
+      for iop in benchmark.input_output_pairs:
+          success = runAndVerify(benchmark, iop)
+          if not success:
+              logger.debug(f'    unsuccessful execution.')
+              _seen_before[md5sum] = {"res": False, "problemsizes": problemsizes}
+              logger.info(f'Failed execution with seq {[(seq,str_BinListAsHex(seqs[seq])) for seq in seqs]}')
+              return False, problemsizes
 
-    # if we made it here, it means that all object files compiled, the
-    # executable linked and executed, and the results were correct for every
-    # input/output pair. Success!
-    logger.info(f'Successful test for all i/o pairs with seq {[(seq,str_BinListAsHex(seqs[seq])) for seq in seqs]}')
-    _seen_before[md5sum] = {"res": True, "problemsizes": problemsizes}
-    copyExecutable(benchmark, 'final')
+      # if we made it here, it means that all object files compiled, the
+      # executable linked and executed, and the results were correct for every
+      # input/output pair. Success!
+      logger.info(f'Successful test for all i/o pairs with seq {[(seq,str_BinListAsHex(seqs[seq])) for seq in seqs]}')
+      _seen_before[md5sum] = {"res": True, "problemsizes": problemsizes}
+      copyExecutable(benchmark, 'final', fp.name)
     return True, problemsizes
 
 def compileAndRunAllConfigurations(benchmark, problemsizes):
