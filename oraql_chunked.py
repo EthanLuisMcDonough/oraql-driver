@@ -185,7 +185,7 @@ def md5(fname):
   return hash_md5.hexdigest()
 
 _seen_before = dict()
-def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
+def compileAndRunOneConfiguration(benchmark, seqs, problemsizes, initialRun = False):
     global _seen_before
     # compile individual files into object files
     with tempfile.NamedTemporaryFile() as fp:
@@ -193,7 +193,10 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
           logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
           seqstr = " ".join([str(s) for s in seqs[source_file.path]])
           options = source_file.options + benchmark.options
-          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          if(initialRun):
+              cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v'])
+          else:
+              cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
           fp.write(bytes(cmd, 'utf-8'))
           fp.flush()
           success, thisproblemsize = compileFile(benchmark, source_file, fp)
@@ -277,7 +280,7 @@ def runBenchmark(benchmark_file):
     success = False
     seqs = {x.path:[] for x in benchmark.source_files}
     problemsizes = {x.path:0 for x in benchmark.source_files}
-    success, problemsizes = compileAndRunOneConfiguration(benchmark, seqs, problemsizes)
+    success, problemsizes = compileAndRunOneConfiguration(benchmark, seqs, problemsizes, True)
     if success:
         logger.info(f'- Initial build successful, proceed to '
                     f'optimistic optimization for '
