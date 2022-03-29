@@ -77,6 +77,8 @@ def compileFile(benchmark, source_file, seqfile):
     compiler = oraql_settings.clangcommand
     if source_file.path.endswith('.cc') or source_file.path.endswith('.cpp') or source_file.path.endswith('.cu'):
         compiler =  oraql_settings.clangppcommand
+    if "compiler" in benchmark:
+        compiler = benchmark.compiler
     try:
         run_result = sp.run(f'{compiler} @{seqfile.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
 

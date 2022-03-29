@@ -12,7 +12,7 @@
         {
             "__type__": "InputOutputPair",
             "input": ["-s", "15"],
-            "output": "lulesh.reference_output_noomp",
+            "output": "lulesh.reference_output",
             "timeout": 999,
             "returncode": 0,
             "use_stdout": true,
@@ -24,11 +24,12 @@
         "-march=native",
         "-g",
         "-c",
+        "-fopenmp",
         "-DUSE_MPI=0",
         "-I."
     ],
-    "executable": "./lulesh",
-    "make_cmd": "make lulesh",
+    "executable": "./lulesh-omp",
+    "make_cmd": "make lulesh-omp",
     "verify_cmd": ""
 }
 

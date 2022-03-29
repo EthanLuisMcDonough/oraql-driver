@@ -27,8 +27,9 @@
         "-DUSE_MPI=0",
         "-I."
     ],
-    "executable": "./lulesh",
-    "make_cmd": "make lulesh",
-    "verify_cmd": ""
+    "executable": "./lulesh-mpi",
+    "make_cmd": "make lulesh-mpi",
+    "verify_cmd": "",
+    "compiler": "mpicxx"
 }
 

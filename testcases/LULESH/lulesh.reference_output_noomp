@@ -1,6 +1,5 @@
 Running problem size 15\^3 per domain until completion
 Num processors: \d+
-Num threads: \d+
 Total number of elements: 3375 
 
 To run other sizes, use -s <integer>.
@@ -17,9 +16,9 @@ Run completed:
    Iteration count     =  400
    Final Origin Energy =  5.702\d+e\+04
    Testing Plane 0 of Energy Array on rank 0:
-        MaxAbsDiff   = 1.81\d+e-11
-        TotalAbsDiff = 9.14\d+e-11
-        MaxRelDiff   = 5.05\d+e-13
+        MaxAbsDiff   = 5.22\d+e-12
+        TotalAbsDiff = 7.83\d+e-11
+        MaxRelDiff   = 4.87\d+e-13
 
 Elapsed time         =        \d+.\d+ \(s\)
 Grind time \(us\/z\/c\)  =  \d+.\d+ \(per dom\)  \(\s+\d+.\d+ overall\)
