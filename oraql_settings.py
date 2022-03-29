@@ -1,0 +1,2 @@
+clangcommand = "clang"
+clangppcommand = "clang++"
