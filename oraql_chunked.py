@@ -81,7 +81,7 @@ def compileFile(benchmark, source_file, seqfile):
         run_result = sp.run(f'{compiler} @{seqfile.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
 
         if run_result.returncode is not 0:
-            logger.debug(f'   - Compile error, exit code was {run_result.returncode} and command was:\n{compiler} {cmd} {source_file.path}')
+            logger.debug(f'   - Compile error, exit code was {run_result.returncode} and command was:\n{compiler} @{seqfile.name} {source_file.path}')
             return False, 0
     except Exception as e:
         logger.warning(f'   - Compile error:\n'
@@ -191,14 +191,15 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes):
     with tempfile.NamedTemporaryFile() as fp:
       for source_file in benchmark.source_files:
           logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
-          seqstr = " ".join(["-1 "+str(s) for s in seqs[source_file.path]])
+          seqstr = " ".join([str(s) for s in seqs[source_file.path]])
           options = source_file.options + benchmark.options
-          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-optimistic-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
           fp.write(bytes(cmd, 'utf-8'))
           fp.flush()
           success, thisproblemsize = compileFile(benchmark, source_file, fp)
           problemsizes[source_file.path] = max(thisproblemsize, problemsizes[source_file.path])
           if not success:
+              logger.debug(f'tmpfile content was: {cmd}')
               logger.info(f'Failed compilation with seq {str_BinListAsHex(seqs[source_file.path])}')
               return False, problemsizes
 
