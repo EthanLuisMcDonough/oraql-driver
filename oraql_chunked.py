@@ -185,7 +185,7 @@ def md5(fname):
   return hash_md5.hexdigest()
 
 _seen_before = dict()
-def compileAndRunOneConfiguration(benchmark, seqs, problemsizes, initialRun = False):
+def compileAndRunOneConfiguration(benchmark, seqs, problemsizes, initialBuild = False):
     global _seen_before
     # compile individual files into object files
     with tempfile.NamedTemporaryFile() as fp:
@@ -193,10 +193,9 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes, initialRun = Fa
           logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
           seqstr = " ".join([str(s) for s in seqs[source_file.path]])
           options = source_file.options + benchmark.options
-          if(initialRun):
-              cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v'])
-          else:
-              cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          if(initialBuild):
+              cmd += ' -mllvm -opt-aa-target="pessimisticAA"' # by supplying a target that does not exist, we disable optimism
           fp.write(bytes(cmd, 'utf-8'))
           fp.flush()
           success, thisproblemsize = compileFile(benchmark, source_file, fp)
