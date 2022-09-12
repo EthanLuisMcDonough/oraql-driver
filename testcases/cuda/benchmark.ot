@@ -1,0 +1,35 @@
+{
+    "__type__": "Benchmark",
+    "name": "XSBench",
+    "source_files": [
+        {
+            "__type__": "SourceFile",
+            "path": "Simulation.cu",
+            "options": [],
+            "only_functions": []
+        }
+    ],
+    "input_output_pairs": [
+        {
+            "__type__": "InputOutputPair",
+            "input": ["-m", "event", "-s", "large"],
+            "output": "./result_defaults.txt",
+            "timeout": 999,
+            "returncode": 0,
+            "use_stdout": true,
+            "use_stderr": true
+        }
+    ],
+    "options": [
+        "-O3",
+        "-march=native",
+        "-DVERIFICATION",
+        "-mllvm",
+        "-opt-aa-target=nvptx",
+        "-c"
+    ],
+    "executable": "./XSBench",
+    "make_cmd": "make",
+    "verify_cmd": ""
+}
+

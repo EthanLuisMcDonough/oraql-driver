@@ -1,0 +1,79 @@
+
+ Performance counter stats for './lulesh-omp.initial -s 30' (10 runs):
+
+        705,207.42 msec task-clock                #  111.437 CPUs utilized            ( +-  2.04% )
+             2,797      context-switches          #    0.004 K/sec                    ( +- 24.34% )
+               241      cpu-migrations            #    0.000 K/sec                    ( +-  0.48% )
+         3,897,182      page-faults               #    0.006 M/sec                    ( +-  0.01% )
+ 2,082,947,167,550      cycles                    #    2.954 GHz                      ( +-  2.17% )
+   682,663,176,899      instructions              #    0.33  insn per cycle           ( +-  2.46% )
+   159,519,456,875      branches                  #  226.202 M/sec                    ( +-  3.09% )
+       302,210,896      branch-misses             #    0.19% of all branches          ( +-  0.66% )
+
+             6.328 +- 0.130 seconds time elapsed  ( +-  2.05% )
+
+ Performance counter stats for './lulesh-omp.final -s 30' (10 runs):
+
+        708,984.05 msec task-clock                #  111.405 CPUs utilized            ( +-  2.21% )
+             2,736      context-switches          #    0.004 K/sec                    ( +- 22.59% )
+               240      cpu-migrations            #    0.000 K/sec                    ( +-  0.61% )
+         3,896,980      page-faults               #    0.005 M/sec                    ( +-  0.01% )
+ 2,043,108,276,916      cycles                    #    2.882 GHz                      ( +-  2.39% )
+   652,914,951,984      instructions              #    0.32  insn per cycle           ( +-  2.77% )
+   154,855,188,228      branches                  #  218.418 M/sec                    ( +-  3.43% )
+       297,472,765      branch-misses             #    0.19% of all branches          ( +-  0.60% )
+
+             6.364 +- 0.141 seconds time elapsed  ( +-  2.22% )
+
+ Performance counter stats for 'mpirun -n 8 ./lulesh-mpi.initial -s 30' (10 runs):
+
+        360,704.78 msec task-clock                #    7.956 CPUs utilized            ( +-  0.22% )
+             5,316      context-switches          #    0.015 K/sec                    ( +-  1.34% )
+             1,079      cpu-migrations            #    0.003 K/sec                    ( +-  0.29% )
+        40,819,768      page-faults               #    0.113 M/sec                    ( +-  0.01% )
+ 1,228,052,622,741      cycles                    #    3.405 GHz                      ( +-  0.23% )
+ 2,289,192,594,415      instructions              #    1.86  insn per cycle           ( +-  0.42% )
+   173,703,802,472      branches                  #  481.568 M/sec                    ( +-  0.86% )
+       486,272,632      branch-misses             #    0.28% of all branches          ( +-  0.92% )
+
+           45.3387 +- 0.0948 seconds time elapsed  ( +-  0.21% )
+
+ Performance counter stats for 'mpirun -n 8 ./lulesh-mpi.final -s 30' (10 runs):
+
+        358,227.63 msec task-clock                #    7.958 CPUs utilized            ( +-  0.16% )
+             5,210      context-switches          #    0.015 K/sec                    ( +-  0.89% )
+             1,087      cpu-migrations            #    0.003 K/sec                    ( +-  0.26% )
+        40,817,236      page-faults               #    0.114 M/sec                    ( +-  0.01% )
+ 1,218,692,122,272      cycles                    #    3.402 GHz                      ( +-  0.17% )
+ 2,229,904,444,566      instructions              #    1.83  insn per cycle           ( +-  0.29% )
+   165,392,019,526      branches                  #  461.695 M/sec                    ( +-  0.61% )
+       458,846,642      branch-misses             #    0.28% of all branches          ( +-  0.58% )
+
+           45.0155 +- 0.0710 seconds time elapsed  ( +-  0.16% )
+
+ Performance counter stats for './lulesh.initial -s 30' (10 runs):
+
+         17,551.86 msec task-clock                #    1.000 CPUs utilized            ( +-  0.20% )
+                30      context-switches          #    0.002 K/sec                    ( +-  9.91% )
+                 0      cpu-migrations            #    0.000 K/sec                    ( +-100.00% )
+         2,331,693      page-faults               #    0.133 M/sec                    ( +-  0.00% )
+    63,467,972,731      cycles                    #    3.616 GHz                      ( +-  0.19% )
+   126,718,645,767      instructions              #    2.00  insn per cycle           ( +-  0.00% )
+     6,642,046,752      branches                  #  378.424 M/sec                    ( +-  0.02% )
+        22,981,868      branch-misses             #    0.35% of all branches          ( +-  0.18% )
+
+           17.5556 +- 0.0352 seconds time elapsed  ( +-  0.20% )
+
+
+ Performance counter stats for './lulesh.final -s 30' (10 runs):
+
+         17,433.08 msec task-clock                #    1.000 CPUs utilized            ( +-  0.11% )
+                28      context-switches          #    0.002 K/sec                    ( +-  9.21% )
+                 0      cpu-migrations            #    0.000 K/sec
+         2,331,692      page-faults               #    0.134 M/sec                    ( +-  0.00% )
+    63,057,400,427      cycles                    #    3.617 GHz                      ( +-  0.09% )
+   126,728,036,630      instructions              #    2.01  insn per cycle           ( +-  0.00% )
+     6,643,641,986      branches                  #  381.094 M/sec                    ( +-  0.02% )
+        22,877,741      branch-misses             #    0.34% of all branches          ( +-  0.14% )
+
+           17.4360 +- 0.0188 seconds time elapsed  ( +-  0.11% )

@@ -1,0 +1,4 @@
+module use /soft/modulefiles/
+module load openmpi/4.1.1-llvm
+export OMPI_CXX=/home/jhuckelheim/llvm-project/build/bin/clang++
+export OMPI_CC=/home/jhuckelheim/llvm-project/build/bin/clang

@@ -1,5 +1,5 @@
 Running problem size 15\^3 per domain until completion
-Num processors: \d+
+Num processors: 1
 Total number of elements: 3375 
 
 To run other sizes, use -s <integer>.
@@ -12,15 +12,15 @@ See help \(-h\) for more options
 
 Run completed:
    Problem size        =  15
-   MPI tasks           =  \d+
+   MPI tasks           =  1
    Iteration count     =  400
    Final Origin Energy =  5.702\d+e\+04
    Testing Plane 0 of Energy Array on rank 0:
-        MaxAbsDiff   = 5.22\d+e-12
-        TotalAbsDiff = 7.83\d+e-11
-        MaxRelDiff   = 4.87\d+e-13
+        MaxAbsDiff   = 1.00\d+e-11
+        TotalAbsDiff = 7.69\d+e-11
+        MaxRelDiff   = 2.22\d+e-13
 
-Elapsed time         =        \d+.\d+ \(s\)
-Grind time \(us\/z\/c\)  =  \d+.\d+ \(per dom\)  \(\s+\d+.\d+ overall\)
+Elapsed time         =\s+\d+.\d+ \(s\)
+Grind time \(us\/z\/c\)  =\s+\d+.\d+ \(per dom\)  \(\s*\d+.\d+ overall\)
 FOM                  =\s+\d+.\d+ \(z\/s\)
 

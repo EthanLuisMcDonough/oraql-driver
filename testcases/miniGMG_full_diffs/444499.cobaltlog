@@ -1,0 +1,5 @@
+Jobid: 444499
+qsub -t 120 -n 1 -q skylake_8180 -I
+Fri Apr 01 13:26:27 2022 +0000 (UTC) submitted with cwd set to: /home/jhuckelheim/llvm-project/oraql-driver/testcases/miniGMG_full
+jobid 444499 submitted from terminal /dev/pts/12
+Fri Apr 01 13:27:11 2022 +0000 (UTC) Info: user delete requested; removing job from the queue

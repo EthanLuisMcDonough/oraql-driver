@@ -1,0 +1,25 @@
+Jobid: 444638
+qsub -t 360 -n 1 -q skylake_8180 -I
+Sat Apr 02 05:23:33 2022 +0000 (UTC) submitted with cwd set to: /home/jhuckelheim/ORAQL/oraql-driver/testcases/miniGMG_full
+jobid 444638 submitted from terminal /dev/pts/9
+Sat Apr 02 05:23:58 2022 +0000 (UTC) 
+Sat Apr 02 05:23:58 2022 +0000 (UTC) Command: '/usr/bin/ssh' 'skylake03' '/usr/libexec/cobalt/cobalt-launcher.py' '--nf' '/var/tmp/cobalt.444638' '--jobid' '444638' '--cwd' '/home/jhuckelheim/ORAQL/oraql-driver/testcases/miniGMG_full' '--env' 'COBALT_JOBID=444638' '/bin/sleep' '21600'
+Sat Apr 02 05:23:58 2022 +0000 (UTC) 
+Sat Apr 02 05:23:58 2022 +0000 (UTC) Environment:
+Sat Apr 02 05:23:58 2022 +0000 (UTC) SHELL=/bin/bash
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_NODEFILE=/tmp/tmpAMLJ1T
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_PARTNAME=skylake03
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_JOBID=444638
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_STARTTIME=1648877024
+Sat Apr 02 05:23:58 2022 +0000 (UTC) LOGNAME=jhuckelheim
+Sat Apr 02 05:23:58 2022 +0000 (UTC) USER=jhuckelheim
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_ENDTIME=1648898624
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_PARTSIZE=1
+Sat Apr 02 05:23:58 2022 +0000 (UTC) HOME=/home/jhuckelheim
+Sat Apr 02 05:23:58 2022 +0000 (UTC) COBALT_JOBSIZE=1
+Sat Apr 02 05:23:58 2022 +0000 (UTC) 
+Sat Apr 02 05:23:58 2022 +0000 (UTC) Info: stdin received from /dev/null
+Sat Apr 02 05:23:58 2022 +0000 (UTC) Info: stdout sent to /home/jhuckelheim/ORAQL/oraql-driver/testcases/miniGMG_full/444638.output
+Sat Apr 02 05:23:58 2022 +0000 (UTC) Info: stderr sent to /home/jhuckelheim/ORAQL/oraql-driver/testcases/miniGMG_full/444638.error
+Sat Apr 02 05:23:58 2022 +0000 (UTC) 
+Sat Apr 02 06:51:00 2022 +0000 (UTC) Info: user delete requested with signal SIGTERM by user jhuckelheim

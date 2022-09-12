@@ -1,0 +1,40 @@
+                                  INPUT SUMMARY
+================================================================================
+Programming Model:            CUDA
+CUDA Device:                  .*
+Simulation Method:            Event Based
+Grid Type:                    Unionized Grid
+Materials:                    12
+H-M Benchmark Size:           large
+Total Nuclides:               355
+Gridpoints \(per Nuclide\):     11,303
+Unionized Energy Gridpoints:  4,012,565
+Total XS Lookups:             17,000,000
+Est. Memory Usage \(MB\):       5,649
+Binary File Mode:             Off
+================================================================================
+                         INITIALIZATION - DO NOT PROFILE
+================================================================================
+Intializing nuclide grids...
+Intializing unionized grid...
+Intializing material data...
+Intialization complete. Allocated 5648 MB of data on CPU.
+Allocating and moving simulation data to GPU memory space...
+GPU Intialization complete. Allocated 5778 MB of data on GPU.
+
+================================================================================
+                                   SIMULATION
+================================================================================
+Running baseline event-based simulation...
+Reducing verification results...
+
+Simulation complete.
+================================================================================
+                                     RESULTS
+================================================================================
+NOTE: Timings are estimated -- use nvprof/nsys/iprof/rocprof for formal analysis
+Runtime:     .+
+Lookups:     17,000,000
+Lookups/s:   .+
+Verification checksum: \d+ \(Valid\)
+================================================================================

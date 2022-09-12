@@ -1,0 +1,27 @@
+Jobid: 444500
+qsub -t 120 -n 1 -q skylake_8180 -I
+Fri Apr 01 13:27:23 2022 +0000 (UTC) submitted with cwd set to: /home/jhuckelheim/llvm-project/oraql-driver/testcases/miniGMG_full
+jobid 444500 submitted from terminal /dev/pts/12
+Fri Apr 01 15:57:36 2022 +0000 (UTC) Info: job is not being held; ignoring release request
+Fri Apr 01 20:48:33 2022 +0000 (UTC) Info: job is not being held; ignoring release request
+Fri Apr 01 22:29:46 2022 +0000 (UTC) 
+Fri Apr 01 22:29:46 2022 +0000 (UTC) Command: '/usr/bin/ssh' 'skylake10' '/usr/libexec/cobalt/cobalt-launcher.py' '--nf' '/var/tmp/cobalt.444500' '--jobid' '444500' '--cwd' '/home/jhuckelheim/llvm-project/oraql-driver/testcases/miniGMG_full' '--env' 'COBALT_JOBID=444500' '/bin/sleep' '7200'
+Fri Apr 01 22:29:46 2022 +0000 (UTC) 
+Fri Apr 01 22:29:46 2022 +0000 (UTC) Environment:
+Fri Apr 01 22:29:46 2022 +0000 (UTC) SHELL=/bin/bash
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_NODEFILE=/tmp/tmpQpq0nO
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_PARTNAME=skylake10
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_JOBID=444500
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_STARTTIME=1648852170
+Fri Apr 01 22:29:46 2022 +0000 (UTC) LOGNAME=jhuckelheim
+Fri Apr 01 22:29:46 2022 +0000 (UTC) USER=jhuckelheim
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_ENDTIME=1648859370
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_PARTSIZE=1
+Fri Apr 01 22:29:46 2022 +0000 (UTC) HOME=/home/jhuckelheim
+Fri Apr 01 22:29:46 2022 +0000 (UTC) COBALT_JOBSIZE=1
+Fri Apr 01 22:29:46 2022 +0000 (UTC) 
+Fri Apr 01 22:29:46 2022 +0000 (UTC) Info: stdin received from /dev/null
+Fri Apr 01 22:29:46 2022 +0000 (UTC) Info: stdout sent to /home/jhuckelheim/llvm-project/oraql-driver/testcases/miniGMG_full/444500.output
+Fri Apr 01 22:29:46 2022 +0000 (UTC) Info: stderr sent to /home/jhuckelheim/llvm-project/oraql-driver/testcases/miniGMG_full/444500.error
+Fri Apr 01 22:29:46 2022 +0000 (UTC) 
+Sat Apr 02 00:29:38 2022 +0000 (UTC) Info: maximum execution time exceeded; initiating job termination

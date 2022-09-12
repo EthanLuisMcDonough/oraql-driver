@@ -1,0 +1,25 @@
+Jobid: 442076
+qsub -t 360 -n 1 -q skylake_8180 -I
+Tue Mar 29 18:05:26 2022 +0000 (UTC) submitted with cwd set to: /home/jhuckelheim/llvm-project/oraql-driver/testcases
+jobid 442076 submitted from terminal /dev/pts/0
+Tue Mar 29 18:05:53 2022 +0000 (UTC) 
+Tue Mar 29 18:05:53 2022 +0000 (UTC) Command: '/usr/bin/ssh' 'skylake10' '/usr/libexec/cobalt/cobalt-launcher.py' '--nf' '/var/tmp/cobalt.442076' '--jobid' '442076' '--cwd' '/home/jhuckelheim/llvm-project/oraql-driver/testcases' '--env' 'COBALT_JOBID=442076' '/bin/sleep' '21600'
+Tue Mar 29 18:05:53 2022 +0000 (UTC) 
+Tue Mar 29 18:05:53 2022 +0000 (UTC) Environment:
+Tue Mar 29 18:05:53 2022 +0000 (UTC) SHELL=/bin/bash
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_NODEFILE=/tmp/tmpYbeb2_
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_PARTNAME=skylake10
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_JOBID=442076
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_STARTTIME=1648577133
+Tue Mar 29 18:05:53 2022 +0000 (UTC) LOGNAME=jhuckelheim
+Tue Mar 29 18:05:53 2022 +0000 (UTC) USER=jhuckelheim
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_ENDTIME=1648598733
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_PARTSIZE=1
+Tue Mar 29 18:05:53 2022 +0000 (UTC) HOME=/home/jhuckelheim
+Tue Mar 29 18:05:53 2022 +0000 (UTC) COBALT_JOBSIZE=1
+Tue Mar 29 18:05:53 2022 +0000 (UTC) 
+Tue Mar 29 18:05:53 2022 +0000 (UTC) Info: stdin received from /dev/null
+Tue Mar 29 18:05:53 2022 +0000 (UTC) Info: stdout sent to /home/jhuckelheim/llvm-project/oraql-driver/testcases/442076.output
+Tue Mar 29 18:05:53 2022 +0000 (UTC) Info: stderr sent to /home/jhuckelheim/llvm-project/oraql-driver/testcases/442076.error
+Tue Mar 29 18:05:53 2022 +0000 (UTC) 
+Tue Mar 29 18:50:33 2022 +0000 (UTC) Info: user delete requested with signal SIGTERM by user jhuckelheim

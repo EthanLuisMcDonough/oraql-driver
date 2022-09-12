@@ -1,0 +1,1 @@
+-O3 -march=native -g -c -DUSE_MPI=1 -I. -O3 -mllvm -stats -v 

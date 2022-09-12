@@ -1,0 +1,10 @@
+#!/bin/sh
+
+start=`date +%s.%N`
+$@
+r=$?
+end=`date +%s.%N`
+
+runtime=$( echo "$end - $start" | bc -l )
+echo $runtime > time.out
+exit $r

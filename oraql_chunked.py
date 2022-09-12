@@ -135,7 +135,10 @@ def copyExecutable(benchmark, version, seqfile=None):
     
 
 def runAndVerify(benchmark, io_pair):
-    cmd = [benchmark.executable]+io_pair.input
+    if "verify_cmd" in benchmark and benchmark.verify_cmd != "":
+        cmd = benchmark.verify_cmd+io_pair.input
+    else:
+        cmd = [benchmark.executable]+io_pair.input
     logger.debug(f'    - Run command "{" ".join(cmd)}"')
     try:
         run_result = sp.run(cmd, timeout=io_pair.timeout, stdout=PIPE, stderr=PIPE)
