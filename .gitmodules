@@ -1,0 +1,11 @@
+[submodule "RAJAProxies"]
+	path = testcases/RAJAProxies
+	url = https://github.com/LLNL/RAJAProxies
+
+[submodule "SNAP"]
+	path = testcases/SNAP
+	url = https://github.com/FitSNAP/TestSNAP
+
+[submodule "XSBench"]
+	path = testcases/XSBench
+	url = https://github.com/ANL-CESAR/XSBench
