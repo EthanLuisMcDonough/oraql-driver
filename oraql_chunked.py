@@ -73,17 +73,43 @@ def readBenchmarkFile(benchmark_file):
                      f'{e}')
         return None
 
+# Returns true on failure
+def runCompileCmd(cmd_args):
+    logger.debug(f'RUNNING {cmd_args}')
+    run_result = sp.run(cmd_args, shell=True, stdout=PIPE, stderr=PIPE)
+    if run_result.returncode != 0:
+        logger.debug(f'   - Compile error, exit code was {run_result.returncode} and command was:\n{cmd_args}')
+        return False
+    return run_result
+
 def compileFile(benchmark, source_file, seqfile):
     compiler = oraql_settings.clangcommand
+    opt = oraql_settings.optcommand
     if source_file.path.endswith('.cc') or source_file.path.endswith('.cpp') or source_file.path.endswith('.cu'):
         compiler =  oraql_settings.clangppcommand
+    if source_file.path.endswith('.f90') or source_file.path.endswith('.F90'):
+        compiler = oraql_settings.flangcommand
     if "compiler" in benchmark:
         compiler = benchmark.compiler
-    try:
-        run_result = sp.run(f'{compiler} @{seqfile.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
 
-        if run_result.returncode is not 0:
-            logger.debug(f'   - Compile error, exit code was {run_result.returncode} and command was:\n{compiler} @{seqfile.name} {source_file.path}')
+    file_base = source_file.path.rsplit(".", 1)[0]
+    print(seqfile.readline())
+
+    options = source_file.options + benchmark.options
+    btc_outfile = file_base + '.bc'
+    btc_opt_outfile = file_base + '.opt.bc'
+    o_outfile = file_base + '.o'
+    btc_options = " ".join([*options, '-O3', '-emit-llvm', '-o', btc_outfile])
+    o_options = " ".join([*options, '-o', o_outfile]) #'-O3',
+
+    try:
+        # insert opt 
+        if not runCompileCmd(f'{compiler} {btc_options} {source_file.path}'):
+            return False, 0
+        run_result = runCompileCmd(f'{opt} @{seqfile.name} {btc_outfile} -o {btc_opt_outfile}')
+        if not run_result:
+            return False, 0
+        if not runCompileCmd(f'{compiler} {o_options} {btc_opt_outfile}'):
             return False, 0
     except Exception as e:
         logger.warning(f'   - Compile error:\n'
@@ -110,7 +136,7 @@ def linkExecutable(benchmark):
     try: 
         cmd = [benchmark.make_cmd]
         run_result = sp.run(cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL, shell=True)
-        if run_result.returncode is not 0:
+        if run_result.returncode != 0:
             logger.warn(f'   - Make command error, exit code was '
                         f'{run_result.returncode}:\n'
                         f'     - Command: {" ".join(cmd)}')
@@ -201,15 +227,17 @@ def compileAndRunOneConfiguration(benchmark, seqs, problemsizes, initialBuild = 
           logger.debug(f'- Compiling {source_file.path} with seq {str_BinListAsHex(seqs[source_file.path])}')
           seqstr = " ".join([str(s) for s in seqs[source_file.path]])
           options = source_file.options + benchmark.options
-          cmd = " ".join([*options, '-O3', '-mllvm', '-stats', '-v', '-mllvm', f'-opt-aa-seq="{seqstr}"', '-flegacy-pass-manager'])
+          print(source_file.path)
+          print(seqstr)
+          cmd = " ".join(['-O3', '-aa-pipeline=optimistic-aa', '-stats', f'--opt-aa-seq="{seqstr}"'])
           if(initialBuild):
-              cmd += ' -mllvm -opt-aa-target="pessimisticAA"' # by supplying a target that does not exist, we disable optimism
+              cmd += ' -opt-aa-target="pessimisticAA"' # by supplying a target that does not exist, we disable optimism
           fp.write(bytes(cmd, 'utf-8'))
           fp.flush()
           success, thisproblemsize = compileFile(benchmark, source_file, fp)
           problemsizes[source_file.path] = max(thisproblemsize, problemsizes[source_file.path])
+          logger.debug(f'tmpfile content was: {cmd}')
           if not success:
-              logger.debug(f'tmpfile content was: {cmd}')
               logger.info(f'Failed compilation with seq {str_BinListAsHex(seqs[source_file.path])}')
               return False, problemsizes
 
@@ -293,6 +321,7 @@ def runBenchmark(benchmark_file):
                     f'optimistic optimization for '
                     f'{len(benchmark.source_files)} source files')
         copyExecutable(benchmark, 'initial')
+        print("RAN" + str(problemsizes))
         seqs = compileAndRunAllConfigurations(benchmark, problemsizes)
     else:
         logger.info(f'- Initial build of {benchmark.name} failed')

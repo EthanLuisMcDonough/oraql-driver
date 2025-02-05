@@ -77,7 +77,7 @@ def compileFile(benchmark, source_file, seq):
           fp.flush()
           run_result = sp.run(f'{compiler} @{fp.name} {source_file.path}', shell=True, stdout=PIPE, stderr=PIPE)
 
-          if run_result.returncode is not 0:
+          if run_result.returncode != 0:
             logger.debug(f'   - Compile error, exit code was '
                           f'{run_result.returncode}:\n'
                           f'     - Command: {cmd}')
@@ -107,7 +107,7 @@ def linkExecutable(benchmark):
     try: 
         cmd = [benchmark.make_cmd]
         run_result = sp.run(cmd, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
-        if run_result.returncode is not 0:
+        if run_result.returncode != 0:
             logger.warn(f'   - Make command error, exit code was '
                         f'{run_result.returncode}:\n'
                         f'     - Command: {" ".join(cmd)}')
